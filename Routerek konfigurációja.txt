@@ -1,0 +1,60 @@
+Router-ek konfigurációja
+
+Enying 
+
+ena
+conf t
+Hostname Enying 
+
+int gig0/0
+ip address 192.168.100.253 255.255.255.0
+ip nat inside
+no sh
+
+int gig0/1
+ip address 11.11.11.10 255.255.255.248
+ip nat outside
+no sh
+
+int gig0/2
+ip address 192.168.170.1 255.255.255.0
+ip nat inside
+no sh
+
+int s0/0/0
+ip address 192.168.150.1 255.255.255.0
+no sh
+encapsulation frame-relay
+frame-relay interface-dlci 100
+frame-relay interface-dlci 101
+ip ospf network broadcast
+
+int Tunnel1
+ip address 192.168.160.1 255.255.255.0
+no sh
+tunnel source s0/0/0
+tunnel destination 192.168.150.2
+ip mtu 1400
+ip tcp adjust-mss 1300
+exit
+
+router ospf 1
+network 192.168.150.0 0.0.0.255 area 0
+network 192.168.100.0 0.0.0.255 area 0
+network 192.168.170.0 0.0.0.255 area 0
+exit
+
+ip route 0.0.0.0 0.0.0.0 gig0/1
+ip nat inside source static list 1 int gig0/1 overload
+access-list 1 permit 192.168.100.0 0.0.0.255
+access-list 1 permit 192.168.150.0 0.0.0.255
+access-list 1 permit 192.168.170.0 0.0.0.255
+exit
+
+
+
+ip route 192.168.50.254 255.255.255.255 192.168.160.2 10
+ip route 192.168.50.253 255.255.255.255 192.168.160.2 10
+
+
+
