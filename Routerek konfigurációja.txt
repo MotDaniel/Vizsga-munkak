@@ -56,5 +56,44 @@ exit
 ip route 192.168.50.254 255.255.255.255 192.168.160.2 10
 ip route 192.168.50.253 255.255.255.255 192.168.160.2 10
 
+Acl-ek:
+
+
+
+Miskolc
+
+ena
+conf t
+hostname Miskolc
+
+int gig0/1
+ip address 192.168.200.254 255.255.255.0
+ip nat inside
+no sh
+
+int gig0/2
+ip address 33.33.33.10 255.255.255.252
+ip nat outside
+no sh
+
+int s0/0/0
+ip address 192.168.150.3 255.255.255.0
+ip nat inside
+no sh
+encapsulation frame-relay
+frame-relay interface-dlci
+frame-relay interface-dlci
+ip ospf network broadcast
+
+router ospf 1
+network 192.168.200.0 0.0.0.255 area 0
+network 192.168.150.0 0.0.0.255 area 0
+exit
+
+ip route 0.0.0.0 0.0.0.0 gig0/2
+ip nat inside source static list 1 int gig0/2 overload
+access-list 1 permit
+
+
 
 
