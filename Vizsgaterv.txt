@@ -4,7 +4,7 @@ Telephelyek: 1 Kereskedelmi telephely
              2 Webszerver telephely
              3 Raktár telephely
 
-1. 192.168.100.0/24
+1.
 	A Windows_1 szerver ip-je 192.168.100.254/24
 	A Windows_2 szerver ip je 192.168.100.253/24
 	Az informatikusok hálózata:192.168.170.0/24
@@ -21,7 +21,7 @@ router: Belső hálózat: 192.168.10.1/24
 	FrameRelay: 192.168.150.1/24
 	GRE tunnel: 192.168.160.1/24
 
-2. 192.168.50.0/24
+2.
 	A Linux webszerver: 192.168.50.254/24
 	A Linux szerver: 192.168.50.253/24
 	Kecskemét-RH belső hálózat: 192.168.50.252/24
@@ -32,7 +32,7 @@ router: Belső hálózat: 192.168.10.1/24
 	Kecskemét belső HSRP virtuális ip: 192.168.50.250
 	
 
-3. 192.168.200.0/24
+3.
 	Miskolc külső: 33.33.33.10/30
 	Miskolc belső hálózat: 192.168.200.254/24
 	Miskolc FrameRelay: 192.168.150.3/24
@@ -61,4 +61,5 @@ Szerverek: Yettel: 33.33.33.5/29
 	   Tkom: 11.11.11.5/29
 	   One_1: 22.22.22.3/29
 	   One_2: 22.22.22.4/29
+
 
