@@ -1,10 +1,10 @@
 Router-ek konfigurációja
 
-Enying 
+Kecskemét 
 
 ena
 conf t
-Hostname Enying 
+Hostname Kecskemét
 
 int gig0/0
 ip address 192.168.10.1 255.255.255.0
@@ -60,11 +60,11 @@ Acl-ek:
 
 
 
-Miskolc
+Cegléd
 
 ena
 conf t
-hostname Miskolc
+hostname Cegléd
 
 int gig0/1
 ip address 192.168.200.254 255.255.255.0
@@ -96,11 +96,11 @@ access-list 1 permit 192.168.200.0 0.0.0.255
 exit
 
 
-Kecskemét_1
+Szolnok_1
 
 ena
 conf t
-Hostname Kecskemet_1
+Hostname Szolnok_1
 
 int gig0/0
 ip address 192.168.50.252 255.255.255.0
@@ -144,10 +144,10 @@ deafult-information originate
 exit
 
 
-Kecskemét_2
+Szolnok_2
 ena
 conf t
-hostname Kecskemet_2
+hostname Szolnok_2
 
 int gig0/0
 ip address 192.168.50.251 255.255.255.0 
@@ -466,6 +466,7 @@ switchport trunk allowed vlan 130
 exit
 
 ASA
+
 
 
 
