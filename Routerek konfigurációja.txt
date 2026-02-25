@@ -486,13 +486,14 @@ exit
 
 
 access-list OUT extended permit icmp any any echo
-access-list OUT extended permit tcp any host 192.168.180.10 eq 80
-access-list OUT extended permit tcp any host 192.168.180.10 eq 443
+access-list OUT extended permit tcp any host 192.168.180.50 eq 80
+access-list OUT extended permit tcp any host 192.168.180.50 eq 443
 access-group OUT in int outside
 
 router ospf 1
 network 192.168.180.0 255.255.255.0 area 0
 network 192.168.50.0 255.255.255.0 area 0
+
 
 
 
