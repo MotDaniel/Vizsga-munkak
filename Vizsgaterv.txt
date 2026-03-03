@@ -1,65 +1,62 @@
 Vizsgaterv IP tartományok
 
-Telephelyek: 1 Kereskedelmi telephely
-             2 Webszerver telephely
-             3 Raktár telephely
+Budapest Sárga
+HSRP1
+belső 192.168.1.1/24
+virtuális 192.168.1.100
+külső 11.11.11.2/30
 
-1.
-	A Windows_1 szerver ip-je 192.168.100.254/24
-	A Windows_2 szerver ip je 192.168.100.253/24
-	Az informatikusok hálózata:192.168.170.0/24
-	Layer3-as switchen VLAN-ok: 10 192.168.110.0/24
-				    20 192.168.120.0/24
-                                    30 192.168.130.0/24
-	                            40 (WiFi hálózat) 192.168.140.0/24
-				    100 A Windows_1 szerver ip-je 192.168.100.254/24
-					A Windows_2 szerver ip je 192.168.100.253/24
-	Multilayer Switch ip: 192.168.10.2/24
+HSRP2
+belső 192.168.1.2/24
+virtuális 192.168.1.100
+külső 11.11.11.6/30
 
-router: Belső hálózat: 192.168.10.1/24
-	Külső hálózat: 11.11.11.10/29
-	FrameRelay: 192.168.150.1/24
-	GRE tunnel: 192.168.160.1/24
+Frame Relay RH
+belső 192.168.2.3/24
+Frame relay 192.168.150.1
 
-2.
-	A Linux webszerver: 192.168.50.254/24
-	A Linux szerver: 192.168.50.253/24
-	Kecskemét-RH belső hálózat: 192.168.50.252/24
-	Kecskemét-RH FrameRelay: 192.168.150.2/24
-	Kecskemét-RH külső hálózat: 22.22.22.10/30
-	Kecskemét-Külső belső hálózat: 192.168.50.251/24
-	Kecskemét-Külső külső hálózat: 22.22.22.14/29
-	Kecskemét belső HSRP virtuális ip: 192.168.50.250
-	
+Multilayer
+Routerek fele 192.168.1.4/24
+1 switch 192.168.10.1//25
+2 switch 192.168.100.1/29
+ASA 192.168.160.1/30
+5 switch 192.168.10.129/25
+6 ap 192.168.20.1/26
 
-3.
-	Miskolc külső: 33.33.33.10/30
-	Miskolc belső hálózat: 192.168.200.254/24
-	Miskolc FrameRelay: 192.168.150.3/24
-	Linux_3: 192.168.200.253/24
-	
-Külső hálózat:
+Gyál Lila
+RH
+Frame Relay 192.168.150.3
+Belső
+külső 33.33.33.2/30
 
-Tkom_Router: Enying fele:11.11.11.9/30
-	     Yettel_Router: 11.11.11.13/30
-	     One_Router_1: 11.11.11.17/30
-	     A szerver fele:11.11.11.1/29
+Kecskemét
+RH
+Frame Relay 192.168.150.2
+küslő 22.22.22.2/30
 
-One_Router_1: Kecskemét fele: 22.22.22.9/30
-	      Tkom fele: 11.11.11.18/30
-	      Szerverek fele: 22.22.22.1/29
+ISP1
+rh1-fele 11.11.11.1/30
+rh2-fele 11.11.11.5/30
+isp3-fele 33.33.33.6/30
+isp2-fele 22.22.22.6/30
+Szerver fele 11.11.11.9/29
 
-One_Router_2: Szerverek fele: 22.22.22.2/29
-	      Kecskemét fele: 22.22.22.13/30
+ISP2
+rh3-fele 22.22.22.1/30
+isp1-fele 22.22.22.5/30
+isp3-fele 33.33.33.10/30
+Szerver fele 22.22.22.9/29
 
-Yettel_Router: Tkom fele: 11.11.11.14/30
-	       Miskolc fele: 33.33.33.9/30
-	       Szerverek fele: 33.33.33.1/29
+ISP3
+rh4-fele 33.33.33.1/30
+isp1-fele 33.33.33.5/30
+isp2-fele 33.33.33.9/30
+Szerver fele 33.33.33.13/29
 
 
-Szerverek: Yettel: 33.33.33.5/29
-	   Tkom: 11.11.11.5/29
-	   One_1: 22.22.22.3/29
-	   One_2: 22.22.22.4/29
+
+
+
+
 
 
