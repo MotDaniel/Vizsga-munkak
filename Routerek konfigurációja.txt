@@ -95,26 +95,27 @@ ip nat inside source list 1 int gig0/2 overload
 access-list 1 permit 192.168.200.0 0.0.0.255 
 exit
 
-
-Szolnok_1
+Budapest
+RH1
 
 ena
 conf t
-Hostname Szolnok_1
+Hostname RH1
 
 int gig0/0
-ip address 192.168.50.252 255.255.255.0
-ip nat inside
-no sh
-standby 1 ip 192.168.50.250
-standby 1 preempt
-standby priority 110
-
-int gig0/1
-ip address 22.22.22.10 255.255.255.248
+ip address 11.11.11.2 255.255.255.252
 ip nat outside
 no sh
 
+int gig0/1
+ip address 192.168.1.1 255.255.255.0
+ip nat inside
+no sh
+standby 1 ip 192.168.1.100
+standby 1 preempt
+standby priority 110
+
+(RH5-be)
 int s0/0/0
 ip address 192.168.150.2 255.255.255.0
 no sh
@@ -131,46 +132,46 @@ tunnel destination 192.168.150.1
 ip mtu 1400
 ip tcp adjust-mss 1300
 exit
+(/)
 
-ip route 0.0.0.0 0.0.0.0 gig0/1
-ip nat inside source list 1 int gig0/1 overload
-access-list 1 permit 192.168.50.0 0.0.0.255
+ip route 0.0.0.0 0.0.0.0 gig0/0
+ip nat inside source static 192.168.150.150 11.11.11.3
+ip nat inside source list 1 int gig0/0 overload
+access-list 1 permit 192.168.1.0 0.0.0.255
 exit
 
 router ospf 1
-network 192.168.50.0 0.0.0.255 area 0
-network 192.168.150.0 0.0.0.255 area 0
+network 192.168.1.0 0.0.0.255 area 0
 deafult-information originate
 exit
 
 
-Szolnok_2
+RH2
 ena
 conf t
-hostname Szolnok_2
+hostname RH2
 
 int gig0/0
-ip address 192.168.50.251 255.255.255.0 
-ip nat inside
-standby 1 ip 192.168.50.250
-standby 1 preempt
-standby 1 priority 100
+ip address 11.11.11.6 255.255.255.248
+ip nat outside
 no sh
 
 int gig0/1
-ip address 22.22.22.14 255.255.255.248
-ip nat outside
-no sh
+ip address 192.168.1.2 255.255.255.0 
+ip nat inside
+standby 1 ip 192.168.1.100
+standby 1 preempt
+standby 1 priority 100
 exit
 
-ip route 0.0.0.0 0.0.0.0 gig0/1
-ip nat inside source static 192.168.50.254 22.22.22.15
-ip nat inside source list 1 int gig0/1 overload
-access-list 1 permit 192.168.50.0 0.0.0.255
+ip route 0.0.0.0 0.0.0.0 gig0/0
+ip nat inside source static 192.168.150.150 11.11.11.11
+ip nat inside source list 1 int gig0/0 overload
+access-list 1 permit 192.168.1.0 0.0.0.255
 exit
 
 router ospf 1
-network 192.168.50.0 0.0.0.255 area 0
+network 192.168.1.0 0.0.0.255 area 0
 default-information originate
 exit
 
@@ -493,6 +494,7 @@ access-group OUT in int outside
 router ospf 1
 network 192.168.180.0 255.255.255.0 area 0
 network 192.168.50.0 255.255.255.0 area 0
+
 
 
 
