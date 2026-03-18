@@ -1,0 +1,51 @@
+"""
+Ez a Python szkript, amely egy Cisco kapcsolóhoz csatlakozik SSH-n keresztül, lekéri a MAC-cím táblát,
+majd megkeresi a megadott MAC-címeket és kiírja egy txt fájlban a hozzájuk tartozó VLAN-t és portot.
+"""
+# Beimportáljuk az eszköz konfigurálásához szükséges modult.
+
+from netmiko import ConnectHandler
+
+#A Cisco eszköz beállításához szükséges belépési adatok.
+
+cisco_sw = {
+    'device_type': 'cisco_ios',
+    'host': '192.168.100.2',
+    'username': 'cisco',
+    'password': 'cisco'
+}
+
+# A kiolvasáshoz szükséges MAC-címek listája.
+
+mac_addresses = ["901b.0ec7.81ef"]
+
+# Létrehozunk egy változót, amelyben elmentjük az SSH kapcsolatot, majd parancsokat adunk ki.
+
+net_connect = ConnectHandler(**cisco_sw)
+
+# Megkérjük az eszközt hogy írja ki a MAC-cím tábláját, az output lista szótárakat alkalmaz (TextFSM feldolgozás után).
+
+output = net_connect.send_command("show mac address-table", use_textfsm=True)
+
+# Egy output nevű txt fájlban kiírjuk a kimeneti adatokat.
+
+f = open('output.txt', "w")
+
+# A fájl kezdő sorában kiírjuk az eszköz nevét.
+
+f.write(f"=== SW1 ===\n")
+
+# Ha a MAC-cím szerepel a listában akkor írja ki a hozzá tartozó VLAN-t és portot az output.txt fájlba.
+
+for entry in output:
+    if entry['destination_address'] in mac_addresses:
+        print(f"MAC: {entry['destination_address']}\nVLAN: {entry['vlan_id']}\nPORT: {entry['destination_port'][0]}")
+        f.write(f"MAC: {entry['destination_address']}\nVLAN: {entry['vlan_id']}\nPORT: {entry['destination_port'][0]}")
+
+# Bezárjuk a txt fájlt.
+
+f.close()
+
+# Lezárjuk az SSH kapcsolatot.
+
+net_connect.disconect()
