@@ -226,10 +226,6 @@ network 192.168.100.0 0.0.0.255 area 0
 network 192.168.160.0 0.0.0.3 area 0
 exit
 
-int range gig1/0/1-2
-switchport mode access 
-switchport access vlan 1
-
 int range gig1/0/17-18
 channel-group 10 mode active
 int port-channel 10
@@ -388,7 +384,7 @@ int range gig0/1-2
 channel-group 10 mode active
 int port-channel 10
 switchport mode trunk
-switchport trunk allowed vlan 10
+switchport trunk allowed vlan 1,10
 exit
 
 
@@ -419,7 +415,7 @@ int range gig0/1-2
 channel-group 20 mode active
 int port-channel 20
 switchport mode trunk
-switchport trunk allowed vlan 20
+switchport trunk allowed vlan 1,20
 exit
 
 
@@ -450,7 +446,7 @@ int range gig0/1-2
 channel-group 30 mode active
 int port-channel 30
 switchport mode trunk
-switchport trunk allowed vlan 30
+switchport trunk allowed vlan 1,30
 exit
 
 ASA
