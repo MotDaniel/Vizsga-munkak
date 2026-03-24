@@ -451,14 +451,10 @@ exit
 
 ASA
 
-int gig1/3
-nameif outside
-security-level 0
+int vlan 1
 ip address 192.168.150.144 255.255.255.0
 no sh
-int gig1/2
-nameif inside
-security-level 100
+int vlan 2
 ip address 192.168.160.2 255.255.255.252
 no sh
 exit
@@ -469,11 +465,13 @@ inspect http
 exit
 
 
-access-list OUT extended permit icmp any any echo
-access-list OUT extended permit tcp any host 192.168.150.150 eq 80
-access-list OUT extended permit tcp any host 192.168.150.150 eq 443
-access-group OUT in int outside
+access-list IN extended permit icmp any any echo
+access-list IN extended permit tcp any host 192.168.150.150 eq 80
+access-list IN extended permit tcp any host 192.168.150.150 eq 443
+access-group IN in int outside
 
 router ospf 1
 network 192.168.160.0 255.255.255.252 area 0
 network 192.168.150.0 255.255.255.0 area 0
+
+no object network obj-any
