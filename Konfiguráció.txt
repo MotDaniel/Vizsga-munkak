@@ -465,7 +465,7 @@ inspect http
 exit
 
 
-access-list IN extended permit icmp any any echo
+access-list IN extended permit icmp any host 192.168.150.150 echo
 access-list IN extended permit tcp any host 192.168.150.150 eq 80
 access-list IN extended permit tcp any host 192.168.150.150 eq 443
 access-group IN in int outside
