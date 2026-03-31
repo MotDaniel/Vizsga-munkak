@@ -103,10 +103,13 @@ access-list 1 permit 192.168.100.0 0.0.0.255
 access-list 1 permit 192.168.160.0 0.0.0.255
 exit
 
+ip route 192.168.0.0 255.255.0.0 192.168.1.3
+
 router ospf 1
 network 192.168.1.0 0.0.0.255 area 0
 default-information originate
 exit
+
 
 
 RH2
@@ -137,6 +140,8 @@ access-list 1 permit 192.168.40.0 0.0.0.255
 access-list 1 permit 192.168.100.0 0.0.0.255
 access-list 1 permit 192.168.160.0 0.0.0.255
 exit
+
+ip route 192.168.0.0 255.255.0.0 192.168.1.3
 
 router ospf 1
 network 192.168.1.0 0.0.0.255 area 0
@@ -173,6 +178,7 @@ conf t
 hostname Multilayer_Switch
 spanning-tree mode rapid-pvst
 
+vlan 2
 vlan 10
 vlan 20
 vlan 30
@@ -181,6 +187,10 @@ exit
 
 int vlan 1
 ip address 192.168.3.1 255.255.255.0
+no sh
+
+int vlan 2
+ip adress 192.168.1.3 255.255.255.0
 no sh
 
 int vlan 10
@@ -206,6 +216,11 @@ ip address 192.168.100.1 255.255.255.0
 no sh
 
 ip routing
+
+int range gig1/0/1-2
+switchport mode access
+switchport access vlan 2
+exit
 
 int gig1/0/3
 no switchport
@@ -249,6 +264,7 @@ switchport mode trunk
 switchport trunk allowed vlan 40
 exit
 
+ip route 0.0.0.0 0.0.0.0 192.168.1.100 
 
 ISP1
 
