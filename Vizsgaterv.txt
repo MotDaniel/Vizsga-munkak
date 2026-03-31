@@ -27,14 +27,14 @@ Asa fele 192.168.160.1/24
 Gyál Lila
 RH4
 Frame Relay 192.168.170.3
-Belső 192.168.30.1/24
+Belső 192.168.40.1/24
 külső 33.33.33.2/30
 
 Kecskemét
 RH3
 Frame Relay 192.168.170.2
 küslő 22.22.22.2/30
-belső 192.168.40.1/24
+belső 192.168.50.1/24
 
 ISP1
 rh1-fele 11.11.11.1/29
