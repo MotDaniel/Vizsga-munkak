@@ -36,9 +36,9 @@ access-list 1 permit 192.168.50.0 0.0.0.255
 exit
 
 ip dhcp excluded-address 192.168.50.0 192.168.50.10
-dhcp pool 1
+ip dhcp pool 1
 network 192.168.50.0 255.255.255.0
-ip default-router 192.168.50.1
+default-router 192.168.50.1
 exit
 
 
@@ -48,8 +48,8 @@ ena
 conf t
 hostname Gyál
 
-vlan 12
 vlan 13
+vlan 14
 vlan 18
 
 int gig0/0
@@ -57,15 +57,18 @@ ip address 192.168.160.1 255.255.255.0
 ip nat inside
 no sh
 
-int gig0/0.12
-enc dot1q vlan 12
-ip address 192.168.120.1 255.255.255.0
-
 int gig0/0.13
+ip nat inside
 enc dot1q vlan 13
 ip address 192.168.130.1 255.255.255.0
 
+int gig0/0.14
+ip nat inside
+enc dot1q vlan 14
+ip address 192.168.140.1 255.255.255.0
+
 int gig0/0.18
+ip nat inside
 enc dot1q vlan 18
 ip address 192.168.180.1 255.255.255.0
 
@@ -84,8 +87,8 @@ frame-relay interface-dlci 111
 ip ospf network broadcast
 
 router ospf 1
-network 192.168.120.0 0.0.0.255 area 0
 network 192.168.130.0 0.0.0.255 area 0
+network 192.168.140.0 0.0.0.255 area 0
 network 192.168.180.0 0.0.0.255 area 0
 network 192.168.160.0 0.0.0.255 area 0
 network 192.168.170.0 0.0.0.255 area 0
@@ -94,14 +97,22 @@ exit
 
 ip route 0.0.0.0 0.0.0.0 gig0/1
 ip nat inside source list 1 int gig0/1 overload
-access-list 1 permit 192.168.120.0 0.0.0.255
 access-list 1 permit 192.168.130.0 0.0.0.255 
+access-list 1 permit 192.168.140.0 0.0.0.255 
 access-list 1 permit 192.168.180.0 0.0.0.255 
 access-list 1 permit 192.168.160.0 0.0.0.255 
 exit
 
-ip dhcp excluded address 
+ip dhcp excluded address 192.168.140.0 192.168.130.10
+ip dhcp pool 1
+network 192.168.140.0 255.255.255.0
+default-router 192.168.140.1
 
+ip dhcp excluded address 192.168.180.0 192.168.180.10
+ip dhcp pool 2
+network 192.168.180.0 255.255.255.0
+default-router 192.168.180.1
+exit
 
 
 Budapest
